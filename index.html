@@ -72,6 +72,74 @@
     }
   </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = [
+    "Jan 2021", "Feb 2021", "Mar 2021", "Apr 2021", "May 2021", "Jun 2021",
+    "Jul 2021", "Aug 2021", "Sep 2021", "Oct 2021", "Nov 2021", "Dec 2021",
+    "Jan 2022", "Feb 2022", "Mar 2022", "Apr 2022", "May 2022", "Jun 2022",
+    "Jul 2022", "Aug 2022", "Sep 2022", "Oct 2022", "Nov 2022", "Dec 2022",
+    "Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", "Jun 2023",
+    "Jul 2023", "Aug 2023", "Sep 2023", "Oct 2023", "Nov 2023", "Dec 2023",
+    "Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024"
+  ];
+
+  const prices = [
+    1.466, 1.597, 1.625, 1.620, 1.625, 1.642,
+    1.642, 1.709, 1.835, 1.821, 1.718, 1.788,
+    1.929, 2.005, 2.046, 2.520, 2.863, 2.707,
+    2.936, 3.116, 2.902, 3.419, 3.589, 4.250,
+    4.823, 4.211, 3.446, 3.270, 2.666, 2.219,
+    2.094, 2.043, 2.065, 2.072, 2.138, 2.507,
+    2.522, 2.996, 2.992, 2.864, 2.699, 2.715
+  ];
+
+  const ctx = document.getElementById('eggPriceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Egg Price (USD/dozen)',
+        data: prices,
+        borderColor: '#ff9933',
+        backgroundColor: 'rgba(255,153,51,0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true },
+        tooltip: { enabled: true },
+        title: {
+          display: true,
+          text: 'US Retail Egg Prices Over Time',
+          font: { size: 16 }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            callback: function(val, index) {
+              // Only show Jan labels each year
+              return labels[index].includes("Jan") ? labels[index] : '';
+            }
+          }
+        },
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Price (USD)'
+          }
+        }
+      }
+    }
+  });
+</script>
 <body>
 
   <header>
@@ -82,7 +150,7 @@
   <section>
     <h2>📊 Egg Price Trends</h2>
     <p>Egg prices have surged over the past year. The chart below illustrates the increase in average retail prices.</p>
-    <img src="egg-price-chart.png" alt="Egg prices over time">
+    <canvas id="eggPriceChart" width="800" height="400"></canvas>
     <p><small>Source: USDA Economic Research Service, 2024</small></p>
   </section>
 
