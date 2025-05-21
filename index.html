@@ -178,7 +178,7 @@
       3.29, 3.26, 3.33, 3.30, 3.26, 3.24,
       3.29, 3.17, 3.18, 3.19, 3.21, 3.23,
       3.23, 3.23, 3.26, 3.26, 3.28, 3.29,
-      3.31
+      3.31, 3.32, 3.33, 3.34
     ];
 
     const ukPricesUSD = ukPricesGBP.map(i => {return i * 1.34})
@@ -198,14 +198,15 @@
           pointRadius: 3
         },
         {
-            label: 'UK Egg Price (USD)',
-            data: ukPricesUSD,
-            borderColor: '#3366cc',
-            backgroundColor: 'rgba(51,102,204,0.2)',
-            fill: false,
-            tension: 0.3,
-            pointRadius: 3
-          }]
+          label: 'UK Egg Price (USD)',
+          data: ukPricesUSD,
+          borderColor: '#3366cc',
+          backgroundColor: 'rgba(51,102,204,0.2)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 3
+        }
+        ]
       },
       options: {
         responsive: true,
